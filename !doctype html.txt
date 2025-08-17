@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Job Alert — Free & Fresh Openings</title>
+  <!-- Tailwind Play CDN (no build needed) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="description" content="Daily job alerts: Govt, Private, Fresher, Internship, Remote. Free to use and share." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🧭</text></svg>">
+  <style>
+    /* Card line-clamp without plugins */
+    .line-clamp-2{ display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <!-- Header -->
+  <header class="sticky top-0 z-40 backdrop-blur bg-white/70 border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="text-2xl">🧭</span>
+        <div>
+          <h1 class="text-xl sm:text-2xl font-bold">Job Alert</h1>
+          <p class="text-xs sm:text-sm text-slate-600">Free, fast & clean job updates</p>
+        </div>
+      </div>
+      <nav class="hidden sm:flex items-center gap-2">
+        <a href="#" id="subscribeLink" class="px-3 py-2 text-sm rounded-xl border border-slate-300 hover:bg-slate-100">Subscribe</a>
+        <a href="#" id="submitJobLink" class="px-3 py-2 text-sm rounded-xl bg-slate-900 text-white hover:bg-slate-800">Post a Job</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Controls -->
+  <section class="max-w-6xl mx-auto px-4 py-5">
+    <div class="grid md:grid-cols-2 gap-3 mb-3">
+      <input id="search" type="search" placeholder="Search: title, company, location..." class="w-full px-4 py-3 rounded-2xl border border-slate-300 outline-none focus:ring-2 focus:ring-slate-400" />
+      <div class="grid grid-cols-3 gap-3">
+        <select id="category" class="px-3 py-3 rounded-2xl border border-slate-300 focus:ring-2 focus:ring-slate-400">
+          <option value="">All Categories</option>
+        </select>
+        <select id="qualification" class="px-3 py-3 rounded-2xl border border-slate-300 focus:ring-2 focus:ring-slate-400">
+          <option value="">Any Qualification</option>
+        </select>
+        <select id="sort" class="px-3 py-3 rounded-2xl border border-slate-300 focus:ring-2 focus:ring-slate-400">
+          <option value="latest">Latest first</option>
+          <option value="deadline">Deadline soonest</option>
+          <option value="a2z">A → Z</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex items-center justify-between text-sm text-slate-600">
+      <div id="resultCount">Loading jobs…</div>
+      <div class="flex items-center gap-2">
+        <label class="inline-flex items-center gap-2"><input id="onlyRemote" type="checkbox" class="w-4 h-4"> Remote only</label>
+        <label class="inline-flex items-center gap-2"><input id="onlyFresh" type="checkbox" class="w-4 h-4"> Fresh in last 3 days</label>
+        <label class="inline-flex items-center gap-2"><input id="onlySaved" type="checkbox" class="w-4 h-4"> Saved</label>
+      </div>
+    </div>
+  </section>
+
+  <!-- Jobs list -->
+  <main class="max-w-6xl mx-auto px-4 pb-24">
+    <div id="jobsList" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    <div id="noResults" class="hidden text-center text-slate-600 mt-10">No matching jobs. Try clearing filters.</div>
+    <div class="flex justify-center mt-6">
+      <button id="loadMore" class="hidden px-5 py-3 rounded-2xl border border-slate-300 hover:bg-slate-100">Load more</button>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 bg-white">
+    <div class="max-w-6xl mx-auto px-4 py-8 text-sm text-slate-600">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <p>© <span id="year"></span> Job Alert. Sources credited. Always verify details on the official site before applying.</p>
+        <div class="flex gap-3">
+          <a href="#" class="underline" id="aboutLink">About</a>
+          <a href="#" class="underline" id="privacyLink">Privacy</a>
+          <a href="#" class="underline" id="disclaimerLink">Disclaimer</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- In‑file JSON so this is 100% copy‑paste single file. Edit/replace below with your jobs. -->
+  <script id="jobs-data" type="application/json">{
+    "subscribe_url": "#",               
+    "submit_job_url": "#",              
+    "jobs": [
+      {
+        "id": "ib-sa-2025",
+        "title": "IB Security Assistant / Executive (4987 Posts)",
+        "company": "Intelligence Bureau (MHA)",
+        "location": "India (Multiple)",
+        "category": "Government",
+        "qualification": "10th Pass",
+        "posted_on": "2025-08-10",
+        "last_date": "2025-09-05",
+        "salary": "As per rules",
+        "apply_url": "https://www.mha.gov.in/",
+        "source": "Official notification",
+        "tags": ["Central Govt", "Security", "All India"],
+        "notes": "Read official notice carefully before applying."
+      },
+      {
+        "id": "pn-intern-2025",
+        "title": "Product Management Intern",
+        "company": "PixelNest",
+        "location": "Remote / Bengaluru",
+        "category": "Internship",
+        "qualification": "Any Graduate",
+        "posted_on": "2025-08-15",
+        "last_date": "2025-08-25",
+        "salary": "₹20k stipend",
+        "apply_url": "https://example.com/apply",
+        "source": "Company careers page",
+        "tags": ["Remote", "Fresher Friendly"],
+        "notes": "6-month internship; convert to PPO based on performance."
+      },
+      {
+        "id": "tcs-ninja-2025",
+        "title": "TCS NQT — Fresher Hiring 2025",
+        "company": "Tata Consultancy Services",
+        "location": "Pan India / Remote",
+        "category": "Private",
+        "qualification": "BE/BTech/Any Graduate",
+        "posted_on": "2025-08-14",
+        "last_date": "2025-09-10",
+        "salary": "Competitive",
+        "apply_url": "https://www.tcs.com/",
+        "source": "TCS Careers",
+        "tags": ["IT", "Graduate"],
+        "notes": "National Qualifier Test required."
+      },
+      {
+        "id": "bank-po-2025",
+        "title": "Public Sector Bank — Probationary Officer",
+        "company": "PSB (Multiple)",
+        "location": "India (State-wise)",
+        "category": "Banking",
+        "qualification": "Graduate",
+        "posted_on": "2025-08-12",
+        "last_date": "2025-08-31",
+        "salary": "₹6–8 LPA",
+        "apply_url": "https://example-bank.in/apply",
+        "source": "Employment News",
+        "tags": ["Bank", "Govt"]
+      },
+      {
+        "id": "punjab-clerk-2025",
+        "title": "Punjab State — Clerk (Group C)",
+        "company": "Punjab Govt",
+        "location": "Punjab",
+        "category": "Government",
+        "qualification": "Graduate",
+        "posted_on": "2025-08-16",
+        "last_date": "2025-09-07",
+        "salary": "As per 7th CPC",
+        "apply_url": "https://example.punjab.gov.in/",
+        "source": "Official site",
+        "tags": ["Punjab", "Group C"]
+      }
+    ]
+  }</script>
+
+  <script>
+    // --- Utilities ---
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+    const state = {
+      raw: [],
+      filtered: [],
+      page: 1,
+      perPage: 18,
+      saved: new Set(JSON.parse(localStorage.getItem('savedJobs') || '[]')),
+    };
+
+    function parseData() {
+      try {
+        const obj = JSON.parse(document.getElementById('jobs-data').textContent.trim());
+        const subscribe = obj.subscribe_url || '#';
+        const submit = obj.submit_job_url || '#';
+        document.getElementById('subscribeLink').href = subscribe;
+        document.getElementById('submitJobLink').href = submit;
+        const jobs = (obj.jobs || []).map(j => ({...j, posted_on: j.posted_on || j.date || '', last_date: j.last_date || '', title: j.title || '', company: j.company || ''}));
+        state.raw = jobs.filter(j => j.title && j.apply_url);
+      } catch(e) {
+        console.error('Invalid JSON in jobs-data', e);
+      }
+    }
+
+    function dayDiff(a, b){
+      const MS = 24*60*60*1000; return Math.floor((a - b) / MS);
+    }
+
+    function fmtDate(s){
+      if(!s) return '';
+      const d = new Date(s.replace(/\//g,'-'));
+      if(isNaN(d)) return s;
+      return d.toLocaleDateString(undefined, {year:'numeric', month:'short', day:'2-digit'});
+    }
+
+    function unique(list, key){
+      return Array.from(new Set(list.map(x => (x[key]||'').trim()).filter(Boolean))).sort((a,b)=>a.localeCompare(b));
+    }
+
+    function populateFilters(){
+      const cats = unique(state.raw, 'category');
+      const quals = unique(state.raw, 'qualification');
+      const catSel = document.getElementById('category');
+      const qualSel = document.getElementById('qualification');
+      cats.forEach(v=>{ const o=document.createElement('option'); o.value=v; o.textContent=v; catSel.appendChild(o); });
+      quals.forEach(v=>{ const o=document.createElement('option'); o.value=v; o.textContent=v; qualSel.appendChild(o); });
+    }
+
+    function applyFilters(){
+      const q = document.getElementById('search').value.trim().toLowerCase();
+      const cat = document.getElementById('category').value;
+      const qual = document.getElementById('qualification').value;
+      const sort = document.getElementById('sort').value;
+      const onlyRemote = document.getElementById('onlyRemote').checked;
+      const onlyFresh = document.getElementById('onlyFresh').checked;
+      const onlySaved = document.getElementById('onlySaved').checked;
+
+      const today = new Date(); today.setHours(0,0,0,0);
+
+      let list = state.raw.filter(j => {
+        const hay = `${j.title} ${j.company} ${j.location} ${(j.tags||[]).join(' ')}`.toLowerCase();
+        if(q && !hay.includes(q)) return false;
+        if(cat && (j.category||'') !== cat) return false;
+        if(qual && (j.qualification||'') !== qual) return false;
+        if(onlyRemote && !/remote/i.test(j.location||'')) return false;
+        if(onlyFresh){
+          const d = new Date((j.posted_on||'').replace(/\//g,'-'));
+          if(isNaN(d) || dayDiff(today, d) > 3) return false;
+        }
+        if(onlySaved && !state.saved.has(j.id)) return false;
+        return true;
+      });
+
+      // sort
+      if(sort === 'deadline'){
+        list.sort((a,b)=>{
+          const ad = new Date((a.last_date||'9999-12-31').replace(/\//g,'-'));
+          const bd = new Date((b.last_date||'9999-12-31').replace(/\//g,'-'));
+          return ad - bd;
+        });
+      } else if(sort === 'a2z'){
+        list.sort((a,b)=>(a.title||'').localeCompare(b.title||''));
+      } else {
+        list.sort((a,b)=>{
+          const ad = new Date((a.posted_on||'1970-01-01').replace(/\//g,'-'));
+          const bd = new Date((b.posted_on||'1970-01-01').replace(/\//g,'-'));
+          return bd - ad; // latest first
+        });
+      }
+
+      state.filtered = list;
+      state.page = 1;
+      render();
+    }
+
+    function render(){
+      const start = 0;
+      const end = state.page * state.perPage;
+      const slice = state.filtered.slice(start, end);
+
+      document.getElementById('resultCount').textContent = `${state.filtered.length} jobs`;
+      document.getElementById('noResults').classList.toggle('hidden', state.filtered.length > 0);
+
+      const html = slice.map(cardHTML).join('');
+      document.getElementById('jobsList').innerHTML = html;
+
+      const more = state.filtered.length > end;
+      document.getElementById('loadMore').classList.toggle('hidden', !more);
+      attachCardEvents();
+    }
+
+    function cardHTML(j){
+      const today = new Date(); today.setHours(0,0,0,0);
+      const posted = new Date((j.posted_on||'').replace(/\//g,'-'));
+      const last = new Date((j.last_date||'').replace(/\//g,'-'));
+      const isNew = !isNaN(posted) && dayDiff(today, posted) <= 3;
+      const daysLeft = !isNaN(last) ? dayDiff(last, today) : null;
+      const deadlineBadge = daysLeft !== null ? (daysLeft < 0 ? `<span class='text-red-700 bg-red-100 px-2 py-0.5 rounded-full text-xs'>Closed</span>` : `<span class='text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full text-xs'>${daysLeft} days left</span>`) : '';
+      const saved = state.saved.has(j.id);
+      const remote = /remote/i.test(j.location||'');
+
+      return `
+      <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 flex flex-col">
+        <div class="flex items-start justify-between gap-2">
+          <div class="min-w-0">
+            <h3 class="font-semibold text-slate-900 line-clamp-2">${escapeHTML(j.title||'')}</h3>
+            <p class="text-sm text-slate-600">${escapeHTML(j.company||'')} · ${escapeHTML(j.location||'')}</p>
+          </div>
+          <button class="saveBtn shrink-0 px-2 py-1 rounded-full border ${saved?'border-slate-900 text-slate-900':'border-slate-300 text-slate-600'}" data-id="${j.id}">${saved?'★':'☆'}</button>
+        </div>
+        <div class="flex items-center gap-2 mt-2 flex-wrap">
+          ${j.category?`<span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">${escapeHTML(j.category)}</span>`:''}
+          ${j.qualification?`<span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">${escapeHTML(j.qualification)}</span>`:''}
+          ${remote?`<span class="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700">Remote</span>`:''}
+          ${isNew?`<span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700">New</span>`:''}
+          ${deadlineBadge}
+        </div>
+        <div class="mt-3 text-sm text-slate-600">
+          ${j.salary?`<div><span class="font-medium text-slate-700">Salary:</span> ${escapeHTML(j.salary)}</div>`:''}
+          ${j.notes?`<div class="mt-1">${escapeHTML(j.notes)}</div>`:''}
+        </div>
+        <div class="mt-4 flex items-center gap-2">
+          <a href="${j.apply_url}" target="_blank" rel="noopener" class="px-3 py-2 rounded-xl bg-slate-900 text-white hover:bg-slate-800">Apply</a>
+          ${j.source?`<a href="#" class="text-sm underline text-slate-600" title="Source" onclick="alert('Source: ${escapeAttr(j.source)}'); return false;">Source</a>`:''}
+          ${j.last_date?`<span class="text-xs text-slate-500 ml-auto">Last date: ${fmtDate(j.last_date)}</span>`:''}
+        </div>
+        <div class="mt-2 text-xs text-slate-500">Posted: ${fmtDate(j.posted_on) || '—'}</div>
+      </article>`;
+    }
+
+    function escapeHTML(s){
+      return String(s).replace(/[&<>\"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[m]));
+    }
+    function escapeAttr(s){ return escapeHTML(s).replace(/\n/g,' '); }
+
+    function attachCardEvents(){
+      $$('#jobsList .saveBtn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.id;
+          if(state.saved.has(id)) state.saved.delete(id); else state.saved.add(id);
+          localStorage.setItem('savedJobs', JSON.stringify(Array.from(state.saved)));
+          applyFilters();
+        });
+      });
+    }
+
+    // Event bindings
+    function bindUI(){
+      ['search','category','qualification','sort','onlyRemote','onlyFresh','onlySaved'].forEach(id=>{
+        document.getElementById(id).addEventListener('input', applyFilters);
+        document.getElementById(id).addEventListener('change', applyFilters);
+      });
+      document.getElementById('loadMore').addEventListener('click', ()=>{ state.page++; render(); });
+      document.getElementById('year').textContent = new Date().getFullYear();
+    }
+
+    // Init
+    parseData();
+    populateFilters();
+    bindUI();
+    applyFilters();
+  </script>
+</body>
+</html>
